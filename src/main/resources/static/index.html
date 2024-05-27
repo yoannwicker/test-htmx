@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="https://unpkg.com/htmx.org@1.4.1"></script>
+</head>
+<body>
+<div class="container">
+    <h1>To-Do List</h1>
+    <form id="add-task-form" hx-post="/tasks" hx-trigger="submit" hx-target="#task-list" hx-swap="beforeend">
+        <input type="text" name="content" placeholder="New Task" required>
+        <button type="submit">Add Task</button>
+    </form>
+    <ul id="task-list" hx-get="/tasks" hx-trigger="load" hx-target="this" hx-swap="innerHTML">
+        <!-- Tasks will be loaded here -->
+    </ul>
+</div>
+</body>
+</html>

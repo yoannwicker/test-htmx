@@ -1,0 +1,37 @@
+## svn directories
+*.svn
+
+## eclipse resources
+*.classpath
+.project
+.springBeans
+*.settings
+.metadata
+.externalToolBuilders
+
+## intellij
+.idea
+*.iml
+
+## sdkman
+.sdkmanrc
+
+## generated
+*.log
+*.log.1
+*.lck
+*.dat
+target
+classes
+git.properties
+
+## others
+*qrycache*
+/bin
+dael-web/src/main/resources/daelviewer.properties
+
+# Ignore Gradle build output directory
+build
+
+# Ignore Gradle project-specific cache directory
+.gradle
