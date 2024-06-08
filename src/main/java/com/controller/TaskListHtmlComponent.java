@@ -2,14 +2,12 @@ package com.controller;
 
 import com.model.Task;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public record TaskListHtmlComponent(List<TaskHtmlComponent> tasks) {
+
   public String render() {
-    StringBuilder sb = new StringBuilder();
-    for (TaskHtmlComponent task : tasks) {
-      sb.append(task.render());
-    }
-    return sb.toString();
+    return tasks.stream().map(TaskHtmlComponent::render).collect(Collectors.joining());
   }
 
   public static TaskListHtmlComponent from(List<Task> tasks) {

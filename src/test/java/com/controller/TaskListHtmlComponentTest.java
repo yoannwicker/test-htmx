@@ -26,6 +26,6 @@ class TaskListHtmlComponentTest {
   }
 
   private static String wrapWithRoot(String content) {
-    return "<ul>" + content + "</ul>";
+    return STR."<ul>\{content}</ul>";
   }
 }
