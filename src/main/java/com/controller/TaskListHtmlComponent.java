@@ -1,13 +1,16 @@
 package com.controller;
 
+import com.controller.htmlcomponent.Component;
+import com.controller.htmlcomponent.Renderer;
 import com.model.Task;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public record TaskListHtmlComponent(List<TaskHtmlComponent> tasks) {
+public record TaskListHtmlComponent(List<TaskHtmlComponent> tasks) implements Component {
 
-  public String render() {
-    return tasks.stream().map(TaskHtmlComponent::render).collect(Collectors.joining());
+  @Override
+  public Renderer render() {
+    return Renderer.from(tasks.stream());
   }
 
   public static TaskListHtmlComponent from(List<Task> tasks) {

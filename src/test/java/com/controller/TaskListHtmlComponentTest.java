@@ -14,7 +14,7 @@ class TaskListHtmlComponentTest {
         List.of(new TaskHtmlComponent(1L, "Buy milk"), new TaskHtmlComponent(2L, "Buy bread")));
 
     // when
-    String result = taskListHtmlComponent.render();
+    String result = taskListHtmlComponent.render().asString();
 
     // then
     String expected = """

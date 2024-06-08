@@ -12,7 +12,7 @@ class TaskHtmlComponentTest {
     TaskHtmlComponent taskHtmlComponent = new TaskHtmlComponent(1L, "Buy milk");
 
     // when
-    String result = taskHtmlComponent.render();
+    String result = taskHtmlComponent.render().asString();
 
     // then
     String expected = "<li id='task-1'>Buy milk <button hx-delete='/tasks/1' hx-target='#task-1' hx-swap='outerHTML'>Delete</button></li>";

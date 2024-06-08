@@ -19,7 +19,7 @@ public class TaskController {
     @ResponseBody
     public String getTasks() {
         List<Task> tasks = taskRepository.findAll();
-        return TaskListHtmlComponent.from(tasks).render();
+        return TaskListHtmlComponent.from(tasks).render().asString();
     }
 
     @PostMapping
@@ -28,7 +28,7 @@ public class TaskController {
         Task task = new Task();
         task.setContent(content);
         taskRepository.save(task);
-        return TaskHtmlComponent.from(task).render();
+        return TaskHtmlComponent.from(task).render().asString();
     }
 
     @DeleteMapping("/{id}")
