@@ -19,7 +19,7 @@ public class TaskController {
     @ResponseBody
     public String getTasks() {
         List<Task> tasks = taskRepository.findAll();
-        return renderTasks(tasks);
+        return TaskListHtmlComponent.from(tasks).render();
     }
 
     @PostMapping
@@ -28,27 +28,12 @@ public class TaskController {
         Task task = new Task();
         task.setContent(content);
         taskRepository.save(task);
-        return renderTask(task);
+        return TaskHtmlComponent.from(task).render();
     }
 
     @DeleteMapping("/{id}")
     @ResponseBody
     public void deleteTask(@PathVariable Long id) {
         taskRepository.deleteById(id);
-    }
-
-    private String renderTasks(List<Task> tasks) {
-        StringBuilder sb = new StringBuilder();
-        for (Task task : tasks) {
-            sb.append(renderTask(task));
-        }
-        return sb.toString();
-    }
-
-    private String renderTask(Task task) {
-        return "<li id='task-" + task.getId() + "'>"
-            + task.getContent()
-            + " <button hx-delete='/tasks/" + task.getId() + "' hx-target='#task-" + task.getId() + "' hx-swap='outerHTML'>Delete</button>"
-            + "</li>";
     }
 }
