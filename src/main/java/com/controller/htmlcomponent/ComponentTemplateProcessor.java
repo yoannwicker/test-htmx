@@ -1,5 +1,6 @@
 package com.controller.htmlcomponent;
 
+import java.util.regex.Matcher;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
@@ -121,12 +122,21 @@ final class ComponentTemplateProcessor implements StringTemplate.Processor<Rende
       var attribute = iterator.next();
       var value = attribute.getValue();
       var matcher = HOLE.matcher(value);
-      if (matcher.matches()) {
+      if (matcher.find()) {
         var index = Integer.parseInt(matcher.group(1));
-        return new ValueAttribute(attribute, values.get(index));
+        var rebuiltValue = replaceHole(value, values.get(index).toString());
+        return new ValueAttribute(attribute, rebuiltValue);
       }
       return attribute;
     }
+  }
+
+  private static String replaceHole(String input, String replacement) {
+    Matcher matcher = HOLE.matcher(input);
+    if (matcher.find()) {
+      return matcher.replaceAll(replacement);
+    }
+    return input;
   }
 
   private static Map<String, Object> asAttributeMap(Iterator<Attribute> iterator) {
