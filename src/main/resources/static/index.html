@@ -10,7 +10,7 @@
 <body>
 <div class="container">
     <h1>To-Do List</h1>
-    <form id="add-task-form" hx-post="/tasks" hx-trigger="submit" hx-target="#task-list" hx-swap="beforeend">
+    <form id="add-task-form" hx-post="/tasks" hx-trigger="submit" hx-target="#task-list" hx-swap="afterbegin">
         <input type="text" name="content" placeholder="Content Task" required>
         <input type="number" name="priority" placeholder="Priority Task" min="1" max="5" required>
         <button type="submit">Add Task</button>
