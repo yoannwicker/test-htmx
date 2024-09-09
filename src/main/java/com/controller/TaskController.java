@@ -24,9 +24,10 @@ public class TaskController {
 
     @PostMapping
     @ResponseBody
-    public String addTask(@RequestParam String content) {
+    public String addTask(@RequestParam String content, @RequestParam int priority) {
         Task task = new Task();
         task.setContent(content);
+        task.setPriority(priority);
         taskRepository.save(task);
         return TaskHtmlComponent.from(task).render().asString();
     }

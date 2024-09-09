@@ -64,3 +64,16 @@ li button {
 li button:hover {
     background-color: #c82333;
 }
+
+.number-circle {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 8px;
+}

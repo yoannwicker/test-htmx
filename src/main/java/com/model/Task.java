@@ -12,6 +12,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
+    private int priority;
 
     public Long getId() {
         return id;
@@ -23,5 +24,13 @@ public class Task {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getPriority() {
+      return priority;
+    }
+
+    public void setPriority(int priority) {
+      this.priority = priority;
     }
 }
