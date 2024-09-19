@@ -14,6 +14,15 @@ public class Task {
     private String content;
     private int priority;
 
+    public Task(String content, int priority) {
+        this.content = content;
+        this.priority = priority;
+    }
+
+    public Task() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -22,15 +31,7 @@ public class Task {
         return content;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public int getPriority() {
       return priority;
-    }
-
-    public void setPriority(int priority) {
-      this.priority = priority;
     }
 }
