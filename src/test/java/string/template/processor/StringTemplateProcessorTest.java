@@ -111,19 +111,18 @@ class StringTemplateProcessorTest {
       var age = 30;
       var JST = new JsonTemplateProcessor();
 
-      JSONObject address = JST."""
-      {
-          postalCode : "\{"92130"}",
-          city : "\{"Issy"}"
-      }
-      """;
+      StringTemplate address1 = RAW."{postalCode : \"\{"92130"}\",city : \"\{"Issy"}\"},";
+      StringTemplate address2 = RAW."{postalCode : \"\{"75008"}\",city : \"\{"Paris"}\"}";
       JSONObject user = JST."""
       {
           name : "\{name}",
           age : \{age},
-          address : \{address.toString()}
+          addresses : [\{StringTemplate.combine(List.of(address1, address2)).interpolate()}]
       }
       """;
+
+      assertThat(user.toString())
+          .isEqualTo("{\"addresses\":[{\"city\":\"Issy\",\"postalCode\":\"92130\"},{\"city\":\"Paris\",\"postalCode\":\"75008\"}],\"name\":\"John\",\"age\":30}");
 
     }
   }
