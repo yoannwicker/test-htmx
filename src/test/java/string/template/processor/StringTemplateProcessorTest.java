@@ -1,12 +1,10 @@
 package string.template.processor;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import static java.lang.StringTemplate.RAW;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.json.JSONObject;
-
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -77,7 +75,7 @@ class StringTemplateProcessorTest {
 
       JSONObject result = JST."""
       {
-          name : "\{name}",>
+          name : "\{name}",
           age : \{age}
       }
       """;
@@ -105,6 +103,29 @@ class StringTemplateProcessorTest {
       assertThat(result.toString()).isEqualTo("{\"name\":\"John\",\"age\":30}");
     }
 
+    class DecimalToBinaryProcessor implements StringTemplate.Processor<String, Exception> {
+
+      @Override
+      public String process(StringTemplate tmpl) throws Exception {
+        List<String> binaryValues = tmpl.values().stream()
+            .map(Integer.class::cast)
+            .map(Integer::toBinaryString)
+            .toList();
+        return StringTemplate.interpolate(tmpl.fragments(), binaryValues);
+      }
+    }
+
+    @Test
+    void decimalToBinaryProcessor() throws Exception {
+      var x = 10;
+      var y = 14;
+      var OP = new DecimalToBinaryProcessor();
+
+      String result = OP."\{x} + \{y} = \{x + y}";
+
+      assertThat(result).isEqualTo("1010 + 1110 = 11000");
+    }
+
     @Test
     void limit() throws Exception {
       var name = "John";
@@ -122,7 +143,8 @@ class StringTemplateProcessorTest {
       """;
 
       assertThat(user.toString())
-          .isEqualTo("{\"addresses\":[{\"city\":\"Issy\",\"postalCode\":\"92130\"},{\"city\":\"Paris\",\"postalCode\":\"75008\"}],\"name\":\"John\",\"age\":30}");
+          .isEqualTo(
+              "{\"addresses\":[{\"city\":\"Issy\",\"postalCode\":\"92130\"},{\"city\":\"Paris\",\"postalCode\":\"75008\"}],\"name\":\"John\",\"age\":30}");
 
     }
   }
